@@ -1,0 +1,32 @@
+name: flutter_desktop_plugins
+description: A new Flutter project.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^0.1.2
+  url_launcher: ^5.4.2
+  url_launcher_web: ^0.1.1+1
+  url_launcher_macos: 0.0.1+4
+  url_launcher_fde:
+    git:
+      url: git://github.com/google/flutter-desktop-embedding.git
+      path: plugins/flutter_plugins/url_launcher_fde
+
+  file_selector:
+    path: packages/file_selector
+  local_storage:
+    path: packages/local_storage
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
