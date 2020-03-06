@@ -11,6 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flinq: ^1.1.1
+
   file_picker: ^1.4.3+2
   file_chooser:
     git:
