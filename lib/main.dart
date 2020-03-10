@@ -51,11 +51,12 @@ class _MyHomePageState extends State<MyHomePage> {
             child: RaisedButton(
               onPressed: () async {
                 final file = await FileSelector().pickFile(
-                  type: FileType.any,
+                  type: FileType.img,
                 );
 
-                setState(() =>
-                    _selectedFile = 'NAME: ${file.name}\nPATH: ${file.path}');
+                setState(() => _selectedFile = file == null
+                    ? 'SELECTION CANCELED'
+                    : 'NAME: ${file.name}\nPATH: ${file.path}\nBYTES: ${file.bytes.take(10)}...');
               },
               child: Text('Select file'),
             ),

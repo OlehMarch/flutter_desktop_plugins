@@ -8,19 +8,22 @@
             "name": "Debug",
             "request": "launch",
             "flutterMode": "debug",
-            "type": "dart"
+            "type": "dart",
+            "program": "lib/main.dart"
         },
         {
             "name": "Release",
             "request": "launch",
             "flutterMode": "release",
-            "type": "dart"
+            "type": "dart",
+            "program": "lib/main.dart"
         },
         {
             "name": "Profile",
             "request": "launch",
             "flutterMode": "profile",
-            "type": "dart"
+            "type": "dart",
+            "program": "lib/main.dart"
         }
     ]
 }

@@ -20,7 +20,8 @@ dependencies:
       path: plugins/flutter_plugins/url_launcher_fde
 
   file_selector:
-    path: packages/file_selector
+    git:
+      url: https://github.com/marchdev-tk/file_selector
   # local_storage:
   #   path: packages/local_storage
 
