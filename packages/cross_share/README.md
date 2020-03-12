@@ -1,4 +1,4 @@
-# local_storage
+# cross_share
 
 A new Flutter package project.
 

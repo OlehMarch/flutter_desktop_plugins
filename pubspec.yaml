@@ -22,8 +22,10 @@ dependencies:
   file_selector:
     git:
       url: https://github.com/marchdev-tk/file_selector
-  # local_storage:
-  #   path: packages/local_storage
+
+  local_storage:
+    git:
+      url: https://github.com/marchdev-tk/local_storage
 
 dev_dependencies:
   flutter_test:

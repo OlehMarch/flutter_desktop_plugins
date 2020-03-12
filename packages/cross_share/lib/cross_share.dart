@@ -1,4 +1,4 @@
-library local_storage;
+library cross_share;
 
 /// A Calculator.
 class Calculator {

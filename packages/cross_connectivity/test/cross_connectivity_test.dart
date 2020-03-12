@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:local_storage/local_storage.dart';
+import 'package:cross_connectivity/cross_connectivity.dart';
 
 void main() {
   test('adds one to input values', () {
