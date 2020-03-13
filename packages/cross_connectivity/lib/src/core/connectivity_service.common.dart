@@ -14,12 +14,20 @@ import 'connectivity_service.interface.dart';
 class ConnectivityService extends ConnectivityServiceInterface {
   /// Constructs a singleton instance of [ConnectivityService].
   ConnectivityService() : super() {
-    _subscription = _connectivity.onConnectivityChanged.listen((_) {
-      final status = ConnectivityStatus.values[_.index];
+    void update(ConnectivityResult result) {
+      final status = ConnectivityStatus.values[result.index];
+      if (_onConnectivityChanged.value != status) {
+        _onConnectivityChanged.add(status);
+      }
 
-      _onConnectivityChanged.add(status);
-      _isConnected.add(status != ConnectivityStatus.none);
-    });
+      final isConnected = status != ConnectivityStatus.none;
+      if (_isConnected.value != isConnected) {
+        _isConnected.add(isConnected);
+      }
+    }
+
+    _subscription = _connectivity.onConnectivityChanged.listen(update);
+    _connectivity.checkConnectivity().then(update);
   }
 
   StreamSubscription _subscription;
@@ -50,7 +58,7 @@ class ConnectivityService extends ConnectivityServiceInterface {
 
   /// Obtains the wifi name (SSID) of the connected network
   ///
-  /// Please note that it DOESN'T WORK on emulators (returns null).
+  /// Please note that it DOESN'T WORK on emulators and web (returns null).
   ///
   /// From android 8.0 onwards the GPS must be ON (high accuracy)
   /// in order to be able to obtain the SSID.
@@ -59,7 +67,7 @@ class ConnectivityService extends ConnectivityServiceInterface {
 
   /// Obtains the wifi BSSID of the connected network.
   ///
-  /// Please note that it DOESN'T WORK on emulators (returns null).
+  /// Please note that it DOESN'T WORK on emulators and web (returns null).
   ///
   /// From Android 8.0 onwards the GPS must be ON (high accuracy)
   /// in order to be able to obtain the BSSID.

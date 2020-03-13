@@ -11,7 +11,7 @@ class Connectivity implements ConnectivityServiceInterface {
   /// Constructs a singleton instance of [Connectivity].
   factory Connectivity() => _singleton;
   const Connectivity._(this._connectivityService);
-  static const Connectivity _singleton = Connectivity._(ConnectivityService());
+  static final Connectivity _singleton = Connectivity._(ConnectivityService());
 
   final ConnectivityService _connectivityService;
 
@@ -38,7 +38,7 @@ class Connectivity implements ConnectivityServiceInterface {
 
   /// Obtains the wifi name (SSID) of the connected network
   ///
-  /// Please note that it DOESN'T WORK on emulators (returns null).
+  /// Please note that it DOESN'T WORK on emulators and web (returns null).
   ///
   /// From android 8.0 onwards the GPS must be ON (high accuracy)
   /// in order to be able to obtain the SSID.
@@ -47,7 +47,7 @@ class Connectivity implements ConnectivityServiceInterface {
 
   /// Obtains the wifi BSSID of the connected network.
   ///
-  /// Please note that it DOESN'T WORK on emulators (returns null).
+  /// Please note that it DOESN'T WORK on emulators and web (returns null).
   ///
   /// From Android 8.0 onwards the GPS must be ON (high accuracy)
   /// in order to be able to obtain the BSSID.

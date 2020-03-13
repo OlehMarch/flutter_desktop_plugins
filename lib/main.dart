@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:local_storage/local_storage.dart';
 
 import 'package:cross_share/cross_share.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:local_storage/local_storage.dart';
 import 'package:file_selector/file_selector.dart';
+import 'package:cross_connectivity/cross_connectivity.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +32,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final _sharedPrefController = TextEditingController();
 
+  Connectivity _connectivity = Connectivity();
   LocalStorageInterface _localStorage;
   String _selectedFile = '';
   String _prefStatus = '';
@@ -56,7 +58,17 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           const SizedBox(height: 16),
           ...children,
-          const Divider(),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  height: 1,
+                  color: Colors.grey[400],
+                  margin: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+                ),
+              ),
+            ],
+          ),
         ],
       );
 
@@ -183,7 +195,29 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           _buildSection(
             title: 'Cross Connectivity',
-            children: [],
+            children: [
+              Center(
+                child: StreamBuilder<ConnectivityStatus>(
+                  stream: _connectivity.onConnectivityChanged,
+                  initialData: _connectivity.onConnectivityChanged.value,
+                  builder: (context, snapshot) => Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Icon(
+                        snapshot.data != ConnectivityStatus.none
+                            ? Icons.signal_wifi_4_bar
+                            : Icons.signal_wifi_off,
+                        color: snapshot.data != ConnectivityStatus.none
+                            ? Colors.green
+                            : Colors.red,
+                      ),
+                      const SizedBox(width: 8),
+                      Text('${snapshot.data}'),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),

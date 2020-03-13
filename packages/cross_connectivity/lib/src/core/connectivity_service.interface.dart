@@ -13,7 +13,13 @@ enum ConnectivityStatus {
   mobile,
 
   /// None: Device not connected to any network
-  none
+  none,
+
+  /// Ethernet: Device connected via Ethernet
+  ethernet,
+
+  /// Unknown: Device connection status unknown
+  unknown,
 }
 
 /// Discover network connectivity configurations: Distinguish between WI-FI
@@ -23,13 +29,13 @@ abstract class ConnectivityServiceInterface {
   const ConnectivityServiceInterface();
 
   /// Fires whenever the connectivity state changes.
-  /// 
+  ///
   /// Only shows whether the device is connected to the network or not.
   ValueStream<bool> get isConnected;
 
   /// Fires whenever the connectivity state changes.
   ValueStream<ConnectivityStatus> get onConnectivityChanged;
-  
+
   /// Checks the connection status of the device.
   ///
   /// Do not use the result of this function to decide whether you can reliably
@@ -40,7 +46,7 @@ abstract class ConnectivityServiceInterface {
 
   /// Obtains the wifi name (SSID) of the connected network
   ///
-  /// Please note that it DOESN'T WORK on emulators (returns null).
+  /// Please note that it DOESN'T WORK on emulators and web (returns null).
   ///
   /// From android 8.0 onwards the GPS must be ON (high accuracy)
   /// in order to be able to obtain the SSID.
@@ -48,7 +54,7 @@ abstract class ConnectivityServiceInterface {
 
   /// Obtains the wifi BSSID of the connected network.
   ///
-  /// Please note that it DOESN'T WORK on emulators (returns null).
+  /// Please note that it DOESN'T WORK on emulators and web (returns null).
   ///
   /// From Android 8.0 onwards the GPS must be ON (high accuracy)
   /// in order to be able to obtain the BSSID.

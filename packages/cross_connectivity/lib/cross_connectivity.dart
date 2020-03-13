@@ -4,6 +4,7 @@
 
 library cross_connectivity;
 
+export 'src/core/connectivity_service.interface.dart';
 export 'src/connectivity.stub.dart'
     if (dart.library.html) 'src/connectivity.web.dart'
     if (dart.library.io) 'src/connectivity.io.dart';
