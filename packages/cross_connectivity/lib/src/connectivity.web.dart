@@ -2,3 +2,62 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+import 'package:rxdart/rxdart.dart';
+
+import 'core/connectivity_service.web.dart';
+import 'core/connectivity_service.interface.dart';
+
+class Connectivity implements ConnectivityServiceInterface {
+  /// Constructs a singleton instance of [Connectivity].
+  factory Connectivity() => _singleton;
+  const Connectivity._(this._connectivityService);
+  static const Connectivity _singleton = Connectivity._(ConnectivityService());
+
+  final ConnectivityService _connectivityService;
+
+  /// Fires whenever the connectivity state changes.
+  ///
+  /// Only shows whether the device is connected to the network or not.
+  @override
+  ValueStream<bool> get isConnected => _connectivityService.isConnected;
+
+  /// Fires whenever the connectivity state changes.
+  @override
+  ValueStream<ConnectivityStatus> get onConnectivityChanged =>
+      _connectivityService.onConnectivityChanged;
+
+  /// Checks the connection status of the device.
+  ///
+  /// Do not use the result of this function to decide whether you can reliably
+  /// make a network request. It only gives you the radio status.
+  ///
+  /// Instead listen for connectivity changes via [onConnectivityChanged] stream.
+  @override
+  Future<ConnectivityStatus> checkConnectivity() =>
+      _connectivityService.checkConnectivity();
+
+  /// Obtains the wifi name (SSID) of the connected network
+  ///
+  /// Please note that it DOESN'T WORK on emulators (returns null).
+  ///
+  /// From android 8.0 onwards the GPS must be ON (high accuracy)
+  /// in order to be able to obtain the SSID.
+  @override
+  Future<String> getWifiName() => _connectivityService.getWifiName();
+
+  /// Obtains the wifi BSSID of the connected network.
+  ///
+  /// Please note that it DOESN'T WORK on emulators (returns null).
+  ///
+  /// From Android 8.0 onwards the GPS must be ON (high accuracy)
+  /// in order to be able to obtain the BSSID.
+  @override
+  Future<String> getWifiBSSID() => _connectivityService.getWifiBSSID();
+
+  /// Obtains the IP address of the connected wifi network
+  @override
+  Future<String> getWifiIP() => _connectivityService.getWifiIP();
+
+  @override
+  void dispose() => _connectivityService.dispose();
+}

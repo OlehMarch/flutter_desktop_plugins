@@ -19,20 +19,23 @@ enum ConnectivityStatus {
 /// Discover network connectivity configurations: Distinguish between WI-FI
 /// and cellular, check WI-FI status and more.
 abstract class ConnectivityServiceInterface {
+  /// Constructs a singleton instance of [ConnectivityServiceInterface].
+  const ConnectivityServiceInterface();
+
   /// Fires whenever the connectivity state changes.
   /// 
   /// Only shows whether the device is connected to the network or not.
   ValueStream<bool> get isConnected;
 
   /// Fires whenever the connectivity state changes.
-  ValueStream<ConnectivityStatus> get connectivity;
+  ValueStream<ConnectivityStatus> get onConnectivityChanged;
   
   /// Checks the connection status of the device.
   ///
   /// Do not use the result of this function to decide whether you can reliably
   /// make a network request. It only gives you the radio status.
   ///
-  /// Instead listen for connectivity changes via [connectivity] stream.
+  /// Instead listen for connectivity changes via [onConnectivityChanged] stream.
   Future<ConnectivityStatus> checkConnectivity();
 
   /// Obtains the wifi name (SSID) of the connected network
@@ -53,4 +56,6 @@ abstract class ConnectivityServiceInterface {
 
   /// Obtains the IP address of the connected wifi network
   Future<String> getWifiIP();
+
+  void dispose();
 }

@@ -9,6 +9,9 @@ import 'connectivity_service.interface.dart';
 /// Discover network connectivity configurations: Distinguish between WI-FI
 /// and cellular, check WI-FI status and more.
 class ConnectivityService extends ConnectivityServiceInterface {
+  /// Constructs a singleton instance of [ConnectivityService].
+  const ConnectivityService() : super();
+
   /// Fires whenever the connectivity state changes.
   ///
   /// Only shows whether the device is connected to the network or not.
@@ -17,7 +20,7 @@ class ConnectivityService extends ConnectivityServiceInterface {
 
   /// Fires whenever the connectivity state changes.
   @override
-  ValueStream<ConnectivityStatus> get connectivity =>
+  ValueStream<ConnectivityStatus> get onConnectivityChanged =>
       throw UnimplementedError();
 
   /// Checks the connection status of the device.
@@ -25,11 +28,9 @@ class ConnectivityService extends ConnectivityServiceInterface {
   /// Do not use the result of this function to decide whether you can reliably
   /// make a network request. It only gives you the radio status.
   ///
-  /// Instead listen for connectivity changes via [connectivity] stream.
+  /// Instead listen for connectivity changes via [onConnectivityChanged] stream.
   @override
-  Future<ConnectivityStatus> checkConnectivity() {
-    throw UnimplementedError();
-  }
+  Future<ConnectivityStatus> checkConnectivity() => throw UnimplementedError();
 
   /// Obtains the wifi name (SSID) of the connected network
   ///
@@ -38,9 +39,7 @@ class ConnectivityService extends ConnectivityServiceInterface {
   /// From android 8.0 onwards the GPS must be ON (high accuracy)
   /// in order to be able to obtain the SSID.
   @override
-  Future<String> getWifiName() {
-    throw UnimplementedError();
-  }
+  Future<String> getWifiName() => throw UnimplementedError();
 
   /// Obtains the wifi BSSID of the connected network.
   ///
@@ -49,13 +48,12 @@ class ConnectivityService extends ConnectivityServiceInterface {
   /// From Android 8.0 onwards the GPS must be ON (high accuracy)
   /// in order to be able to obtain the BSSID.
   @override
-  Future<String> getWifiBSSID() {
-    throw UnimplementedError();
-  }
+  Future<String> getWifiBSSID() => throw UnimplementedError();
 
   /// Obtains the IP address of the connected wifi network
   @override
-  Future<String> getWifiIP() {
-    throw UnimplementedError();
-  }
+  Future<String> getWifiIP() => throw UnimplementedError();
+
+  @override
+  void dispose() => throw UnimplementedError();
 }
