@@ -32,7 +32,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final _sharedPrefController = TextEditingController();
 
-  Connectivity _connectivity = Connectivity();
   LocalStorageInterface _localStorage;
   String _selectedFile = '';
   String _prefStatus = '';
@@ -197,22 +196,25 @@ class _MyHomePageState extends State<MyHomePage> {
             title: 'Cross Connectivity',
             children: [
               Center(
-                child: StreamBuilder<ConnectivityStatus>(
-                  stream: _connectivity.onConnectivityChanged,
-                  initialData: _connectivity.onConnectivityChanged.value,
-                  builder: (context, snapshot) => Row(
+                child: ConnectivityBuilder(
+                  builder: (context, isConnected, status) => Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Icon(
-                        snapshot.data != ConnectivityStatus.none
+                        isConnected == true
                             ? Icons.signal_wifi_4_bar
                             : Icons.signal_wifi_off,
-                        color: snapshot.data != ConnectivityStatus.none
-                            ? Colors.green
-                            : Colors.red,
+                        color: isConnected == true ? Colors.green : Colors.red,
                       ),
                       const SizedBox(width: 8),
-                      Text('${snapshot.data}'),
+                      Text(
+                        '$status',
+                        style: TextStyle(
+                          color: status != ConnectivityStatus.none
+                              ? Colors.green
+                              : Colors.red,
+                        ),
+                      ),
                     ],
                   ),
                 ),
